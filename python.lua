@@ -5,7 +5,7 @@ function py.join(tab, sep)
 end
 
 function py.isdigit(str)
-    return not str:match('%D')
+    return not str:match('%D') and str ~= ''
 end
 
 function py.is_blank(str)
