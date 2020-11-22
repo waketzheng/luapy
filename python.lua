@@ -1,4 +1,4 @@
-py = {}
+local py = {}
 
 function py.join(tab, sep)
     return table.concat(tab, sep)
@@ -10,6 +10,19 @@ end
 
 function py.is_blank(str)
     return not str:match('%S')
+end
+
+function py.lstrip( s )
+    --[[Return s with all leading white spaces and tabs and \r\n removed]]
+    local idx, c = 0
+    while idx < s:len() do
+        idx = idx + 1
+        c = s:sub(idx,idx)
+        if c ~= ' ' and c ~= '\t' and c ~= '\n' and c ~= '\r' then
+            break
+        end
+    end
+    return s:sub(idx)
 end
 
 function py.range(start, stop, step)
@@ -37,6 +50,10 @@ function py.range(start, stop, step)
     return ret
 end
 
+local function is_empty(tab)
+    return next(tab) == nil
+end
+
 function py.bool(any)
     if any == nil then
         return false
@@ -51,15 +68,11 @@ function py.bool(any)
     return any ~= 0
 end
 
-function is_empty(tab)
-    return next(tab) == nil
-end
-
 -- convert table to be a JSON string
 -- tb = {a=1}  ==> repr(tb) == '{"a":1}'
-function repr(tab,...)
+local function repr(tab,...)
     local i, s, is_list, is_nest = 1, '', true, select('#', ...)
-    local pre, sep = '    ', '\n'
+    local pre, sep, value_type = '    ', '\n'
     if is_nest ~= 0 then
         pre, sep = '', ' '
     end
