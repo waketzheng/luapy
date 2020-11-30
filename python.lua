@@ -13,16 +13,16 @@ function py.is_blank(str)
 end
 
 function py.lstrip( s )
-    --[[Return s with all leading white spaces and tabs and \r\n removed]]
-    local idx, c = 0
-    while idx < s:len() do
-        idx = idx + 1
-        c = s:sub(idx,idx)
-        if c ~= ' ' and c ~= '\t' and c ~= '\n' and c ~= '\r' then
-            break
-        end
-    end
-    return s:sub(idx)
+    local b = s:match('^%s*(.*)$')
+    return b or ''
+end
+function py.rstrip( s )
+    local b = s:match('^(.-)%s*$')
+    return b or ''
+end
+function py.strip( s )
+    local b = s:match('^%s*(.-)%s*$')
+    return b or ''
 end
 
 function py.range(start, stop, step)

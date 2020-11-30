@@ -17,6 +17,24 @@ TestListCompare = {}
         lu.assertEquals(py.is_blank('a'), false)
     end
 
+    function TestListCompare:test_strip()
+        lu.assertError(py.strip, nil)  -- arg can only be string
+        lu.assertError(py.strip, {})
+        lu.assertError(py.strip, 0)
+
+        lu.assertEquals('1', py.strip(' 1 '))
+        lu.assertEquals('', py.strip(' '))
+        lu.assertEquals(' 1', py.rstrip(' 1 '))
+        lu.assertEquals('1 ', py.lstrip(' 1 '))
+        lu.assertEquals('2', py.strip('\n \r\t 2 \n\r\t '))
+        lu.assertEquals('3 3', py.strip('  3 3  \n'))
+
+        lu.assertEquals(py.strip('\n1\n2 3\r4 '), '1\n2 3\r4')
+        lu.assertEquals(py.strip('a'), 'a')
+        lu.assertEquals(py.lstrip('a'), 'a')
+        lu.assertEquals(py.rstrip('a'), 'a')
+    end
+
     function TestListCompare:test_isdigit()
         lu.assertError(py.isdigit, nil)  -- arg can only be string
         lu.assertError(py.isdigit, {})
