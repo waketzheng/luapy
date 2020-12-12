@@ -55,14 +55,13 @@ local function is_empty(tab)
 end
 
 function py.bool(any)
-    if any == nil then
+    if not any then
         return false
     end
     local t = type(any)
     if t == 'table' then
         return not is_empty(any)
-    end
-    if t == 'string' then
+    elseif t == 'string' then
         return any ~= ''
     end
     return any ~= 0

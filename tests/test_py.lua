@@ -88,11 +88,13 @@ TestListCompare = {}
 
     function TestListCompare:test_bool()
         lu.assertEquals(py.bool(nil), false)
+        lu.assertEquals(py.bool(false), false)
         lu.assertEquals(py.bool(''), false)
         lu.assertEquals(py.bool(0), false)
         lu.assertEquals(py.bool(0.0), false)
         lu.assertEquals(py.bool({}), false)
 
+        lu.assertEquals(py.bool(true), true)
         lu.assertEquals(py.bool(' '), true)
         lu.assertEquals(py.bool('\n'), true)
         lu.assertEquals(py.bool(1), true)
