@@ -1,7 +1,17 @@
 local py = {}
 
-function py.join(tab, sep)
-    return table.concat(tab, sep)
+py.join = table.concat
+
+function py.int(num, base)
+    if type(num) == 'string' then
+        if base then
+            return math.floor(tonumber(num, (base or 10)))
+        end
+        return math.floor(tonumber(num, base))
+    else
+        assert(not base)
+        return math.floor(num)
+    end
 end
 
 function py.isdigit(str)

@@ -86,6 +86,18 @@ TestListCompare = {}
         lu.assertEquals(py.join({ a=1, b=2 }, ', '), '')
     end
 
+    function TestListCompare:test_int()
+        lu.assertEquals(py.int('012'), 12)
+        lu.assertEquals(py.int(12.1), 12)
+        lu.assertEquals(py.int(12.5), 12)
+        lu.assertEquals(py.int(12.9), 12)
+        lu.assertEquals(py.int('12.9'), 12)
+
+        lu.assertEquals(py.int('ff', 16), 255)
+        lu.assertEquals(py.int('100', 2), 4)
+        lu.assertEquals(py.int('11', 8), 9)
+    end
+
     function TestListCompare:test_bool()
         lu.assertEquals(py.bool(nil), false)
         lu.assertEquals(py.bool(false), false)
