@@ -80,6 +80,7 @@ end
 -- convert table to be a JSON string
 -- tb = {a=1}  ==> repr(tb) == '{"a":1}'
 local function repr(tab,...)
+    if type(tab) ~= 'table' then return tab end
     local i, s, is_list, is_nest = 1, '', true, select('#', ...)
     local pre, sep, value_type = '    ', '\n'
     if is_nest ~= 0 then

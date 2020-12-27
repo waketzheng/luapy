@@ -67,6 +67,9 @@ TestListCompare = {}
     end
 
     function TestListCompare:test_repr()
+        lu.assertEquals(py.repr(nil), nil)
+        lu.assertEquals(py.repr('string'), 'string')
+        lu.assertEquals(py.repr(0), 0)
         lu.assertEquals(py.repr({ 0, 1, 2 }), '[\n    0,\n    1,\n    2\n]')
         expected = {
             '{\n    "a": 1,\n    "b": 2\n}',
